@@ -30,25 +30,26 @@ public class AddCourseForJamesDemo {
 		try {
 
 			session.beginTransaction();
-			System.out.println("Create Course object...");
+			System.out.println("Get Student object...");
 			
-			// create a course
-			Course tempCourse = new Course("Math");
+			int theId = 2;
 			
-			// add some student
-			System.out.println("Saving the Course...");
-			session.save(tempCourse);
-			System.out.println("Saved the Course...");
+			// get student james
+			Student tempStudent = session.get(Student.class, theId);
 
-			Student tempStudent1 = new Student("Paul", "Wall" , "sdq@gmail.com");
-			Student tempStudent2 = new Student("James", "Wall" , "James@gmail.com");
+			// add some student
+			System.out.println("Loaded the Student: " + tempStudent);
+			System.out.println("Course: " + tempStudent.getCourses());
+
+			Course tempCourse1 = new Course("Spring AOP");
+			Course tempCourse2 = new Course("Spring Rest");
 			
-			tempCourse.addStudent(tempStudent1);
-			tempCourse.addStudent(tempStudent2);
+			tempCourse1.addStudent(tempStudent);
+			tempCourse2.addStudent(tempStudent);
 
 			System.out.println("\nSaving the Student...");
-			session.save(tempStudent1);
-			session.save(tempStudent2);
+			session.save(tempCourse1);
+			session.save(tempCourse2);
 			System.out.println("Saved the Student...");
 
 			
